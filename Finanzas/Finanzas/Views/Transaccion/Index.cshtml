@@ -1,0 +1,33 @@
+﻿@{
+    var cuentitas = (Cuenta)ViewBag.Cuenta;
+    var transacciones = ((List<Transaccion>)Model);
+}
+
+<h1>Transaccion | Cuenta @cuentitas.Nombre</h1>
+<h4>Monto: @string.Format("{0:N2}", cuentitas.Saldo) </h4>
+<div>
+    <a href="/transaccion/crear?id=@cuentitas.Id">Registrar transaccion</a> |
+    <a href="/cuenta/index">Lista de cuentas</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Fecha - Hora</th>
+            <th>Motivo</th>
+            <th>Monto</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in transacciones)
+        {
+        <tr>
+            <td>@item.Tipo.Nombre</td>
+            <td>@item.Fecha</td>
+            <td>@item.Descripcion</td>
+            <td>@item.Monto</td>
+        </tr>
+        }
+    </tbody>
+</table>
